@@ -1,0 +1,13 @@
+{% extends "seo_analyzer/layout.html" %}
+
+{% block title %}Home - Video SEO Tool{% endblock %}
+
+{% block content %}
+    <h2>Generate Video Ideas</h2>
+    <form action="{% url 'generate_suggestions' %}" method="post">
+        {% csrf_token %}
+        <label for="search_query">Enter a search term:</label>
+        <input type="text" name="search_query" id="search_query" required>
+        <button type="submit">Get Suggestions</button>
+    </form>
+{% endblock %}

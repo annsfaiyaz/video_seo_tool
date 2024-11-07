@@ -1,0 +1,41 @@
+<!-- seo_analyzer/templates/seo_analyzer/suggestion_results.html -->
+{% extends "seo_analyzer/layout.html" %}
+
+{% block title %}Suggestions - Video SEO Tool{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="my-4">Video Suggestions for "{{ search_query }}"</h2>
+
+        {% if video_data %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Tags</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for video in video_data %}
+                            <tr>
+                                <td>{{ video.snippet.title }}</td>
+                                <td>
+                                    {% if video.snippet.tags %}
+                                        {{ video.snippet.tags|join:" , " }}
+                                    {% else %}
+                                        No tags available
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No video suggestions found for your query.</p>
+        {% endif %}
+
+        <a href="{% url 'index' %}" class="btn btn-primary mt-4">Go back</a>
+    </div>
+{% endblock %}
