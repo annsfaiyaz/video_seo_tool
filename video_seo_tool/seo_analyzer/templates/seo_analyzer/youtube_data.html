@@ -1,0 +1,18 @@
+<h1>YouTube Data Overview</h1>
+    {% for category in videos_data %}
+        <div class="category">
+            <h2 class="category-title">{{ category.category.title }}</h2>
+
+            {% for video in category.videos %}
+                <div class="video">
+                    <div class="video-title">{{ video.title }}</div>
+                    <div class="video-stats">
+                        <p>Likes: {{ video.like_count }}</p>
+                        <p>Comments: {{ video.comment_count }}</p>
+                        <p>Views: {{ video.view_count }}</p>
+                    </div>
+                    <p class="description">{{ video.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}

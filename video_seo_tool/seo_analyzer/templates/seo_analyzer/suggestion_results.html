@@ -2,7 +2,6 @@
 {% extends "seo_analyzer/layout.html" %}
 
 {% block title %}Suggestions - Video SEO Tool{% endblock %}
-
 {% block content %}
     <div class="container">
         <h2 class="my-4">Video Suggestions for "{{ search_query }}"</h2>
@@ -13,20 +12,30 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Published At</th>
+                            <th scope="col">Channel Title</th>
                             <th scope="col">Tags</th>
+                            <th scope="col">Category ID</th>
+                            <th scope="col">Live Broadcast Content</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for video in video_data %}
                             <tr>
                                 <td>{{ video.snippet.title }}</td>
+                                <td>{{ video.snippet.description|default:"No description available" }}</td>
+                                <td>{{ video.snippet.publishedAt|date:"Y-m-d H:i:s" }}</td>
+                                <td>{{ video.snippet.channelTitle|default:"No channel title available" }}</td>
                                 <td>
                                     {% if video.snippet.tags %}
-                                        {{ video.snippet.tags|join:" , " }}
+                                        {{ video.snippet.tags|join:", " }}
                                     {% else %}
                                         No tags available
                                     {% endif %}
                                 </td>
+                                <td>{{ video.snippet.categoryId|default:"No category ID available" }}</td>
+                                <td>{{ video.snippet.liveBroadcastContent|default:"N/A" }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -35,7 +44,6 @@
         {% else %}
             <p>No video suggestions found for your query.</p>
         {% endif %}
-
         <a href="{% url 'index' %}" class="btn btn-primary mt-4">Go back</a>
     </div>
 {% endblock %}

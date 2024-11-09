@@ -86,9 +86,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',       # Name of your PostgreSQL database
-        'USER': 'myuser',            # Your PostgreSQL username
-        'PASSWORD': 'mypassword',    # Your PostgreSQL password
+        'NAME': 'seo_dev',       # Name of your PostgreSQL database
+        'USER': 'postgres',            # Your PostgreSQL username
+        'PASSWORD': 'postgres',    # Your PostgreSQL password
         'HOST': 'localhost',         # Set to 'localhost' or IP if on a remote server
         'PORT': '5432',              # Default PostgreSQL port
     }
@@ -124,6 +124,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+YOUTUBE_API_KEY = "AIzaSyDf5BO-E5XZGq38D7iKlFxLa3rr09CM4i4"
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,47 +1,77 @@
-# services/youtube_service.py
-
+# your_app/youtube_service.py
 import requests
+from django.conf import settings
 
-API_KEY = "AIzaSyDf5BO-E5XZGq38D7iKlFxLa3rr09CM4i4"  # Replace with your actual API key
+API_KEY = settings.YOUTUBE_API_KEY  # Ensure your API key is in your Django settings
 
-def get_categories(search_query):
-    """
-    Fetches video categories based on search parameters.
-    """
-    search_url = "https://www.googleapis.com/youtube/v3/search"
-    search_params = {
-        "part": "snippet",
-        "maxResults": 10,
-        "q": search_query,
-        "type": "video",
-        "videoDuration": "any",
-        "key": API_KEY
-    }
+BASE_URL = "https://www.googleapis.com/youtube/v3"
 
-    response = requests.get(search_url, params=search_params)
-    if response.status_code == 200:
-        search_data = response.json()
-        video_ids = [item["id"]["videoId"] for item in search_data["items"]]
-        return video_ids
-    else:
-        print("Failed to search videos:", response.status_code)
-        return []
+class YouTubeService:
+    @staticmethod
+    def fetch_popular_categories(region_code="PK"):
+        """
+        Fetches the most popular video categories for a given region.
+        """
+        url = f"{BASE_URL}/videoCategories"
+        params = {
+            "part": "snippet",
+            "regionCode": region_code,
+            "key": API_KEY
+        }
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        categories = response.json().get("items", [])
+        return [{"id": item["id"], "title": item["snippet"]["title"]} for item in categories if item["snippet"]["assignable"]]
 
-def get_videos_by_category(video_ids):
-    """
-    Fetches video details for a list of video IDs.
-    """
-    video_url = "https://www.googleapis.com/youtube/v3/videos"
-    video_params = {
-        "part": "snippet,statistics,status",
-        "id": ",".join(video_ids),
-        "key": API_KEY
-    }
+    @staticmethod
+    def fetch_videos_by_category(category_id):
+        """
+        Fetches videos for a given category ID with all relevant data.
+        """
+        url = f"{BASE_URL}/search"
+        params = {
+            "part": "snippet",
+            "type": "video",
+            "videoCategoryId": category_id,
+            "chart": "mostPopular",
+            "maxResults": 2,  # Adjust the limit as needed
+            "key": API_KEY
+        }
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        videos = response.json().get("items", [])
+        video_details = []
+        for video in videos:
+            video_id = video["id"]["videoId"]
+            # Fetch additional details for each video
+            video_data = YouTubeService.fetch_video_details(video_id)
+            video_details.append(video_data)
+        return video_details
 
-    response = requests.get(video_url, params=video_params)
-    if response.status_code == 200:
-        video_data = response.json().get("items", [])
-        return video_data
-    else:
-        print("Failed to retrieve video details:", response.status_code)
-        return []
+    @staticmethod
+    def fetch_video_details(video_id):
+        """
+        Fetches detailed information for a specific video.
+        """
+        url = f"{BASE_URL}/videos"
+        params = {
+            "part": "snippet,statistics",
+            "id": video_id,
+            "key": API_KEY
+        }
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        video_info = response.json().get("items", [])
+        if video_info:
+            video_data = video_info[0]
+            return {
+                "videoId": video_data["id"],
+                "title": video_data["snippet"]["title"],
+                "description": video_data["snippet"]["description"],
+                "channelId": video_data["snippet"]["channelId"],
+                "publishedAt": video_data["snippet"]["publishedAt"],
+                "likeCount": video_data["statistics"].get("likeCount"),
+                "commentCount": video_data["statistics"].get("commentCount"),
+                "viewCount": video_data["statistics"].get("viewCount"),
+            }
+        return None
