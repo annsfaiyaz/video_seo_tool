@@ -3,15 +3,23 @@
 {% block title %}Home - Video SEO Tool{% endblock %}
 
 {% block content %}
-    <h2>Generate Video Ideas</h2>
-    <form action="{% url 'generate_suggestions' %}" method="post">
-        {% csrf_token %}
-        <label for="search_query">Enter a search term:</label>
-        <input type="text" name="search_query" id="search_query" required>
-        <button type="submit">Get Suggestions</button>
-    </form>
-    <form action="{% url 'fetch_youtube_data' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Fetch Latest YouTube Data</button>
-    </form>
+    <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
+        <h1 class="mb-4 text-center">Generate Video Ideas</h1>
+        
+        <!-- Search Form -->
+        <form action="{% url 'generate_suggestions' %}" method="post" class="w-100" style="max-width: 600px;">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="search_query" id="search_query" class="form-control rounded-pill me-2" 
+                       placeholder="Enter a search term..." required style="font-size: 1.2rem; padding: 0.75rem;">
+                <button type="submit" class="btn btn-primary rounded-pill" style="font-size: 1.2rem; padding: 0.75rem 1.5rem;">Get Suggestions</button>
+            </div>
+        </form>
+        
+        <!-- Fetch YouTube Data Button -->
+        <form action="{% url 'fetch_youtube_data' %}" method="post" class="mt-3">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary rounded-pill" style="font-size: 1rem; padding: 0.5rem 1rem;">Fetch Latest YouTube Data</button>
+        </form>
+    </div>
 {% endblock %}

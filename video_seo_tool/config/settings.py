@@ -125,7 +125,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-YOUTUBE_API_KEY = "AIzaSyDf5BO-E5XZGq38D7iKlFxLa3rr09CM4i4"
+YOUTUBE_API_KEY = "AIzaSyAu6lQ5QX25Y1nF71Umig2AUyvZrt9xAAU"
 
 
 # Static files (CSS, JavaScript, Images)
