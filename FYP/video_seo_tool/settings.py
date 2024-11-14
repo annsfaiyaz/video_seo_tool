@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'seo_analyzer',
+    'app',
     'django_crontab'
 ]
 
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'video_seo_tool.urls'
 
 TEMPLATES = [
     {
@@ -70,18 +70,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'video_seo_tool.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -94,6 +86,8 @@ DATABASES = {
     }
 }
 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Use Redis as the broker
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -125,7 +119,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-YOUTUBE_API_KEY = "AIzaSyAu6lQ5QX25Y1nF71Umig2AUyvZrt9xAAU"
+YOUTUBE_API_KEY = "AIzaSyCjz3JfWefO05UxfVcs305iaN_aTpMNfSU"
 
 
 # Static files (CSS, JavaScript, Images)

@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('seo_analyzer', '0002_category_y_category_id'),
+        ('app', '0002_category_y_category_id'),
     ]
 
     operations = [
@@ -34,11 +34,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='video',
             name='channel',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='videos', to='seo_analyzer.channel'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='videos', to='app.channel'),
         ),
         migrations.AddField(
             model_name='video',
             name='tags',
-            field=models.ManyToManyField(blank=True, related_name='videos', to='seo_analyzer.tag'),
+            field=models.ManyToManyField(blank=True, related_name='videos', to='app.tag'),
         ),
     ]

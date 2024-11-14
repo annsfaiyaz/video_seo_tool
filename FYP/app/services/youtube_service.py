@@ -1,7 +1,7 @@
 # your_app/youtube_service.py
 import requests
 from django.conf import settings
-from seo_analyzer.models import Category, Video, Channel, Tag
+from app.models import Category, Video, Channel, Tag
 from django.utils.dateparse import parse_datetime
 import pdb
 
@@ -37,7 +37,7 @@ class YouTubeService:
 
         return saved_categories
 
-    # @staticmethod
+    # @staticmethodYouTubeService
     # def fetch_videos_by_category(category):
     #     """
     #     Fetches videos for a given category ID with all relevant data.

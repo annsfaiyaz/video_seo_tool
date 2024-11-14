@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('seo_analyzer', '0001_initial'),
+        ('app', '0001_initial'),
     ]
 
     operations = [

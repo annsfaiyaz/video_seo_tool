@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('seo_analyzer', '0004_alter_category_category_id_alter_category_channel_id_and_more'),
+        ('app', '0004_alter_category_category_id_alter_category_channel_id_and_more'),
     ]
 
     operations = [

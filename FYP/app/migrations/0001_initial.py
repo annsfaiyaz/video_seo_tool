@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('like_count', models.PositiveIntegerField(blank=True, null=True)),
                 ('comment_count', models.PositiveIntegerField(blank=True, null=True)),
                 ('view_count', models.PositiveIntegerField(blank=True, null=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='videos', to='seo_analyzer.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='videos', to='app.category')),
             ],
         ),
     ]

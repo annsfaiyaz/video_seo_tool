@@ -28,7 +28,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/video_seo_tool/seo_analyzer/templates" />
+        <option value="$MODULE_DIR$/video_seo_tool/app/templates" />
       </list>
     </option>
   </component>

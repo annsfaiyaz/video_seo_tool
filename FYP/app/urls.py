@@ -1,4 +1,4 @@
-# # seo_analyzer/urls.py
+# # app/urls.py
 # from django.urls import path
 # from .views import index, suggestions, title_suggestions
 
