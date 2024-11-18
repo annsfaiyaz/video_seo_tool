@@ -78,13 +78,15 @@ WSGI_APPLICATION = 'video_seo_tool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'seo_dev',       # Name of your PostgreSQL database
+        'NAME': 'seo_dev_2',       # Name of your PostgreSQL database
         'USER': 'postgres',            # Your PostgreSQL username
         'PASSWORD': 'postgres',    # Your PostgreSQL password
         'HOST': 'localhost',         # Set to 'localhost' or IP if on a remote server
         'PORT': '5432',              # Default PostgreSQL port
     }
 }
+
+# Backend Job Fetch Latest Youtube Data in this URL
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Use Redis as the broker
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
